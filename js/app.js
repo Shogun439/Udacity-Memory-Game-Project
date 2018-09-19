@@ -11,20 +11,115 @@
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+
+
+let card = document.getElementsByClassName("card");
+let cards = [...card];
+let cardsu = Array.from(cards);
+let openedCards = [];
+let matchedCards = [];
+let count = 0;
+let moveContainer = document.querySelector(".moves");
+let moves = 0;
+let stars = document.querySelector(".stars");
+let star = document.getElementsByTagName("li");
+let firstGuess, secondGuess;
+let lockBoard = false;
+
+function shuffle(cardsu) {
+    var currentIndex = cardsu.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        temporaryValue = cardsu[currentIndex];
+        cardsu[currentIndex] = cardsu[randomIndex];
+        cardsu[randomIndex] = temporaryValue;
     }
-
-    return array;
+    return cardsu;
 }
 
+for (i = 0; i < cards.length; i++) {
+    cards[i].addEventListener("click", displayCard);
+}
+
+function displayCard() {
+    if (lockBoard) return;
+    if (this === firstGuess) return;
+    this.classList.toggle("open");
+    this.classList.toggle("show");
+    count++;
+
+    if (count === 1 ){
+        firstGuess = this;
+
+        openedCards.push(this);
+        return;
+    }
+    else if (count === 2) {
+        lockBoard = true;
+        secondGuess = this;
+        openedCards.push(this);
+
+        checkMatch();
+        resetCount();
+        moveCounter();
+    }
+};
+
+function checkMatch() {
+
+
+    let isMatch = openedCards[0].dataset.prop === openedCards[1].dataset.prop;
+        isMatch ? matching() : returnCards();
+    }
+
+function matching() {
+    firstGuess.classList.add("match");
+    secondGuess.classList.add("match");
+
+    matchedCards.push(this);
+    gameOver();
+
+}
+
+function resetCount() {
+    count = 0;
+    openedCards = [];
+    returnCards();
+}
+
+function returnCards() {
+setTimeout(() => {
+    firstGuess.classList.remove("show", "open");
+    secondGuess.classList.remove("show", "open");
+
+    lockBoard = false;
+}, 1500);
+}
+
+function moveCounter() {
+    moves++;
+    moveContainer.innerHTML = moves;
+    starRating();
+}
+
+function starRating() {
+    if (moves === 9 ) {
+        stars.removeChild(star[0]);
+    }
+    else if (moves === 14 ) {
+        stars.removeChild(star[0]);
+    }
+}
+
+function gameOver() {
+    setTimeout(() => {
+    if (matchedCards.length === 8) {
+        window.alert(`Congratulations! You only needed ${moves} moves to win!`);
+    }
+}, 1000);
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
