@@ -1,0 +1,193 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotateY(360deg);
+    transition: transform .8s;
+    background: #02b3e4;
+    cursor: default;
+}
+
+.deck .card.noMatch {
+    background: orangered;
+}
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    transform: scale(1.2);
+    transition: transform .5s;
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+}
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+#modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: rgb(132, 226, 226);
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 30px;
+    border: 1px solid rgb(18, 29, 59);
+    font-size: 1.2em;
+    text-align: center;
+    color: rgb(91, 91, 182);
+    width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* Play Again Button */
+.playAgain {
+	-moz-box-shadow:inset 0px 1px 0px 0px #276873;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #276873;
+	box-shadow:inset 0px 1px 0px 0px #276873;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #599bb3), color-stop(1, #26d2ed));
+	background:-moz-linear-gradient(top, #599bb3 5%, #26d2ed 100%);
+	background:-webkit-linear-gradient(top, #599bb3 5%, #26d2ed 100%);
+	background:-o-linear-gradient(top, #599bb3 5%, #26d2ed 100%);
+	background:-ms-linear-gradient(top, #599bb3 5%, #26d2ed 100%);
+	background:linear-gradient(to bottom, #599bb3 5%, #26d2ed 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#26d2ed',GradientType=0);
+	background-color:#599bb3;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #29668f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+.playAgain:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #26d2ed), color-stop(1, #599bb3));
+	background:-moz-linear-gradient(top, #26d2ed 5%, #599bb3 100%);
+	background:-webkit-linear-gradient(top, #26d2ed 5%, #599bb3 100%);
+	background:-o-linear-gradient(top, #26d2ed 5%, #599bb3 100%);
+	background:-ms-linear-gradient(top, #26d2ed 5%, #599bb3 100%);
+	background:linear-gradient(to bottom, #26d2ed 5%, #599bb3 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#26d2ed', endColorstr='#599bb3',GradientType=0);
+	background-color:#26d2ed;
+}
+.playAgain:active {
+	position:relative;
+	top:1px;
+}
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
