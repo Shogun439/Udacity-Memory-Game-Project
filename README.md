@@ -1,7 +1,7 @@
 # Memory Game Project
 
 ## Instructions <img width="30" src="http://cdn.onlinewebfonts.com/svg/img_199693.png">
-Just open the index.html file and enjoy!
+Click here and enjoy! http://projectmemory.surge.sh/
 
 
 ### Community Ressources <img width="30" src= "https://d30y9cdsu7xlg0.cloudfront.net/png/223566-200.png">
